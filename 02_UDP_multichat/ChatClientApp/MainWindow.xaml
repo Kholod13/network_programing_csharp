@@ -13,6 +13,8 @@
             <TextBox x:Name="ipTB" MinWidth="100">127.0.0.1</TextBox>
             <Label>Port:</Label>
             <TextBox x:Name="portTB" MinWidth="100">3300</TextBox>
+            <Label>NickName:</Label>
+            <TextBox x:Name="nameTB" MinWidth="100"></TextBox>
             <Separator />
             <Button MinWidth="50" Click="LeaveBtnClick">Leave</Button>
             <Button MinWidth="50" Click="JoinBtnClick">Join</Button>

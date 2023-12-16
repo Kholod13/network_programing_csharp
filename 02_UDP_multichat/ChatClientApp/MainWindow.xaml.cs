@@ -60,6 +60,8 @@ namespace ChatClientApp
         private async void JoinBtnClick(object sender, RoutedEventArgs e)
         {
             await SendCommand(JOIN_CMD);
+            var message = $"\n({nameTB.Text} Join Chat)";
+            if (string.IsNullOrWhiteSpace(message)) return; // close method
 
             ReceiveMessages();
         }
@@ -67,14 +69,16 @@ namespace ChatClientApp
         private async void LeaveBtnClick(object sender, RoutedEventArgs e)
         {
             await SendCommand(LEAVE_CMD);
+
+            var message = $"\n({nameTB.Text} Leave Chat)";
+            if (string.IsNullOrWhiteSpace(message)) return; // close method
+
         }
 
         private async void SendBtnClick(object sender, RoutedEventArgs e)
         {
-            var message = msgTB.Text;
-
-            // string.IsNullOrEmpty() - check for [null] and [""]
-            // string.IsNullOrWhiteSpace() - check for [null] and [""] and ["       "]
+            DateTime data = DateTime.Now;
+            var message = $"{data.Minute}|{nameTB.Text}: {msgTB.Text}";
             if (string.IsNullOrWhiteSpace(message)) return; // close method
 
             await SendCommand(message);

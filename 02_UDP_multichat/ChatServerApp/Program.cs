@@ -23,10 +23,17 @@ do
 	switch (command)
 	{
 		case JOIN_CMD:
-			members.Add(clientIP);
-			break;
+			if (members.Count < 10)
+			{
+                members.Add(clientIP);
+            }
+			else
+			{
+                Console.WriteLine($"Room is FULL! {members.Count} members");
+            }
+            break;
 
-		case LEAVE_CMD:
+        case LEAVE_CMD:
 			members.Remove(clientIP);
 			break;
 
