@@ -1,0 +1,14 @@
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\01_UDP\01_server\bin\Debug\net6.0\01_server.exe
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\01_UDP\01_server\bin\Debug\net6.0\01_server.deps.json
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\01_UDP\01_server\bin\Debug\net6.0\01_server.runtimeconfig.json
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\01_UDP\01_server\bin\Debug\net6.0\01_server.dll
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\01_UDP\01_server\bin\Debug\net6.0\01_server.pdb
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\01_UDP\01_server\obj\Debug\net6.0\01_server.GeneratedMSBuildEditorConfig.editorconfig
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\01_UDP\01_server\obj\Debug\net6.0\01_server.AssemblyInfoInputs.cache
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\01_UDP\01_server\obj\Debug\net6.0\01_server.AssemblyInfo.cs
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\01_UDP\01_server\obj\Debug\net6.0\01_server.csproj.CoreCompileInputs.cache
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\01_UDP\01_server\obj\Debug\net6.0\01_server.dll
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\01_UDP\01_server\obj\Debug\net6.0\refint\01_server.dll
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\01_UDP\01_server\obj\Debug\net6.0\01_server.pdb
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\01_UDP\01_server\obj\Debug\net6.0\01_server.genruntimeconfig.cache
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\01_UDP\01_server\obj\Debug\net6.0\ref\01_server.dll
