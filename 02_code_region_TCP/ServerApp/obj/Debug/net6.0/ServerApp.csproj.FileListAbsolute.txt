@@ -1,0 +1,14 @@
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\02_code_region_TCP\ServerApp\bin\Debug\net6.0\ServerApp.exe
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\02_code_region_TCP\ServerApp\bin\Debug\net6.0\ServerApp.deps.json
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\02_code_region_TCP\ServerApp\bin\Debug\net6.0\ServerApp.runtimeconfig.json
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\02_code_region_TCP\ServerApp\bin\Debug\net6.0\ServerApp.dll
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\02_code_region_TCP\ServerApp\bin\Debug\net6.0\ServerApp.pdb
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\02_code_region_TCP\ServerApp\obj\Debug\net6.0\ServerApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\02_code_region_TCP\ServerApp\obj\Debug\net6.0\ServerApp.AssemblyInfoInputs.cache
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\02_code_region_TCP\ServerApp\obj\Debug\net6.0\ServerApp.AssemblyInfo.cs
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\02_code_region_TCP\ServerApp\obj\Debug\net6.0\ServerApp.csproj.CoreCompileInputs.cache
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\02_code_region_TCP\ServerApp\obj\Debug\net6.0\ServerApp.dll
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\02_code_region_TCP\ServerApp\obj\Debug\net6.0\refint\ServerApp.dll
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\02_code_region_TCP\ServerApp\obj\Debug\net6.0\ServerApp.pdb
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\02_code_region_TCP\ServerApp\obj\Debug\net6.0\ServerApp.genruntimeconfig.cache
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\02_code_region_TCP\ServerApp\obj\Debug\net6.0\ref\ServerApp.dll

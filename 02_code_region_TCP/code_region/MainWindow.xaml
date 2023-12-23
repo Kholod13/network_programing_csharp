@@ -1,0 +1,22 @@
+﻿<Window x:Class="code_region.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:code_region"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBlock FontSize="24px" TextAlignment="Center" FontWeight="Bold" Margin="20px">Search a Region</TextBlock>
+        <StackPanel>
+            <UniformGrid Columns="3">
+                <TextBlock HorizontalAlignment="Right" FontSize="16px" Margin="20px 60px 10px 0">Input text in english in formatt "BK"</TextBlock>
+                <TextBox x:Name="Input" TextAlignment="Center" FontSize="20px" Height="30px" VerticalAlignment="Top" Margin="0px 60px" Width="150px" HorizontalAlignment="Left"></TextBox>
+                <Button Click="Button_Click" Margin="0 0 20px 0" Height="25px" BorderThickness="1" FontSize="16px">Search</Button>
+            </UniformGrid>
+            <DockPanel>
+                <TextBox BorderThickness="1px" x:Name="Output" TextAlignment="Center" FontSize="30px" Height="40px" VerticalAlignment="Top" Width="250" HorizontalAlignment="Center"></TextBox>
+            </DockPanel>
+        </StackPanel>
+    </Grid>
+</Window>
