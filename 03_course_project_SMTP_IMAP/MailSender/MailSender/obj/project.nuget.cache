@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "pZgbHweucqWee5gTMTKdef/oCoF1pBDQT/gy30Ejvdk8NnyeOzpSOahmu7dOpM20wZLOVNk6MuPuFfpoof8Ijg==",
+  "success": true,
+  "projectFilePath": "C:\\#FILE ZONE\\work files\\Repo\\network_programing_csharp\\03_course_project_SMTP_IMAP\\MailSender\\MailSender\\MailSender.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kholod\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
+    "C:\\Users\\kholod\\.nuget\\packages\\mailkit\\4.2.0\\mailkit.4.2.0.nupkg.sha512",
+    "C:\\Users\\kholod\\.nuget\\packages\\mimekit\\4.2.0\\mimekit.4.2.0.nupkg.sha512",
+    "C:\\Users\\kholod\\.nuget\\packages\\system.formats.asn1\\7.0.0\\system.formats.asn1.7.0.0.nupkg.sha512",
+    "C:\\Users\\kholod\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\kholod\\.nuget\\packages\\system.security.cryptography.pkcs\\7.0.2\\system.security.cryptography.pkcs.7.0.2.nupkg.sha512",
+    "C:\\Users\\kholod\\.nuget\\packages\\system.text.encoding.codepages\\7.0.0\\system.text.encoding.codepages.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
