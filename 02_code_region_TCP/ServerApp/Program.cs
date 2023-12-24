@@ -7,38 +7,67 @@ namespace ServerApp
     public class Program
     {
         static int port = 8080; // порт для приема входящих запросов
-        enum Region
-        {
-            Volynska_AC,
-            Rivnenska_BK,
-            Zhitomyrska_AM,
-            Kyivska_AA,
-            Kyivska_AI,
-            Chernigivska_CB,
-            Sumska_BM,
-            Kharhivska_AX,
-            Luganska_BB,
-            Lvivska_BC,
-            Ternopilska_BO,
-            Hmelnitska_BO,
-            Vynnitska_AB,
-            Cherkaska_CA,
-            Kirovogradska_BA,
-            Dniproptervska_AE,
-            Donetska_AH,
-            Zakarpatska_AO,
-            Frankivska_AT,
-            Chernovitska_CE,
-            Odeska_BH,
-            Mykolaivska_BE,
-            Khersonska_BT,
-            Zaprizka_AP,
-            Crimea_AK,
-            Sevastopol_CH,
-        }
 
         static void Main(string[] args)
         {
+            List<string> regions = new List<string>
+        {
+            "Volynska",
+            "Rivnenska",
+            "Zhitomyrska",
+            "Kyivska",
+            "Kyivska",
+            "Chernigivska",
+            "Sumska",
+            "Kharhivska",
+            "Luganska",
+            "Lvivska",
+            "Ternopilska",
+            "Hmelnitska",
+            "Vynnitska",
+            "Cherkaska",
+            "Kirovogradska",
+            "Dniproptervska",
+            "Donetska",
+            "Zakarpatska",
+            "Frankivska",
+            "Chernovitska",
+            "Odeska",
+            "Mykolaivska",
+            "Khersonska",
+            "Zaprizka",
+            "Crimea",
+            "Sevastopol",
+        };
+            List<string> regions_code = new List<string>
+        {
+            "AC",
+            "BK",
+            "AM",
+            "AA",
+            "AI",
+            "CB",
+            "BM",
+            "AX",
+            "BB",
+            "BC",
+            "BO",
+            "BO",
+            "AB",
+            "CA",
+            "BA",
+            "AE",
+            "AH",
+            "AO",
+            "AT",
+            "CE",
+            "BH",
+            "BE",
+            "BT",
+            "AP",
+            "AK",
+            "CH",
+        };
             // получаем адреса для запуска сокета
             IPAddress iPAddress = IPAddress.Parse("26.194.91.94");//Dns.GetHostEntry("localhost").AddressList[1]; //localhost
             IPEndPoint ipPoint = new IPEndPoint(iPAddress, port);
@@ -74,13 +103,23 @@ namespace ServerApp
                     while (handler.Available > 0);
 
                     Console.WriteLine("Request received");
-                    Console.WriteLine($"{handler.RemoteEndPoint} - {builder.ToString()} at {DateTime.Now.ToShortTimeString()}");
+                    Console.WriteLine($"{handler.RemoteEndPoint} - {builder} at {DateTime.Now.ToShortTimeString()}");
 
                     // отправляем ответ
                     string message = builder.ToString();
 
+                    for (int i = 0; i < regions_code.Count; i++)
+                    {
+                        if (regions_code[i] == message)
+                        {
+                            message = regions[i];
+                            break;
+                        }
+                    }
+
 
                     data = Encoding.Unicode.GetBytes(message);
+                    Console.WriteLine($"Answer: {message}");
                     handler.Send(data);
                     Console.WriteLine("Answer was send");
                     break;

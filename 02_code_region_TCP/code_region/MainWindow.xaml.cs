@@ -30,16 +30,16 @@ namespace code_region
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(address), port);
 
-            Socket socket = null;
-            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(address), port);
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             socket.Connect(ipPoint);
 
-            while (Input.Text != "end")
+            while (Input.Text != "")
             {
                 try
                 {
+                    //send message to server
                     byte[] data = Encoding.Unicode.GetBytes(Input.Text);
                     socket.Send(data);
 
@@ -58,7 +58,7 @@ namespace code_region
                 }
                 catch (Exception ex)
                 {
-                    Output.Text = "Error";
+                    Output.Text = "Incorrect code";
                 }
                 finally
                 {
