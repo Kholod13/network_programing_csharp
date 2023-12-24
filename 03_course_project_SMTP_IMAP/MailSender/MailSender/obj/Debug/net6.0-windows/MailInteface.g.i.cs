@@ -69,7 +69,7 @@ namespace MailSender {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/MailSender;V1.0.0.0;component/mailinteface.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/MailSender;component/mailinteface.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\MailInteface.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
