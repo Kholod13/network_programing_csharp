@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="change_folder.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MailInteface.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -18,6 +21,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="change_folder.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MailInteface.xaml">
       <SubType>Designer</SubType>
     </Page>

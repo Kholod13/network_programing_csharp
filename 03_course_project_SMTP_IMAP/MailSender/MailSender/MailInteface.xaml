@@ -25,14 +25,34 @@
         <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontWeight="UltraBold" FontStyle="Oblique" Foreground="blue" Height="48" Width="211" >MailSender</TextBlock>
 
         <ListBox SelectionChanged="FolderList_SelectionChanged" Grid.Row="1" Grid.Column="0" x:Name="FolderList" Padding="10"></ListBox>
-        <ListBox Grid.Row="1" Grid.Column="1" x:Name="MessagesList" Padding="10"></ListBox>
+        <ListBox SelectionChanged="MessagesList_SelectionChanged" Grid.Row="1" Grid.Column="1" x:Name="MessagesList" Padding="10">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="MaxHeight" Value="30px"/>
+                    <Setter Property="BorderThickness" Value="1px"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            
+        </ListBox>
         <StackPanel Grid.Row="1" Grid.Column="3" Margin="20px">
-            <Button x:Name="FavouriteBtn" Margin="0 0 0 15px" Height="30px">Favourite</Button>
-            <Button x:Name="DeleteBtn" Margin="0 0 0 15px" Height="30px">Delete</Button>
-            <Button x:Name="MarkAsReadBtn" Margin="0 0 0 15px" Height="30px">Mark as read</Button>
-            <Button x:Name="CreateNewFolderBtn" Margin="0 0 0 15px" Height="30px">Create new Folder</Button>
-            <Button x:Name="RenameFolderBtn" Margin="0 0 0 15px" Height="30px">Rename Folder</Button>
-            <Button x:Name="DeleteFolderBtn" Margin="0 0 0 15px" Height="30px">Delete Folder</Button>
+            <UniformGrid>
+                <Button Click="AddToFolderBtn_Click" x:Name="AddToFolderBtn" Margin="2px" Height="30px">Add to folder</Button>
+                <Button Click="CreateNewFolderBtn_Click" x:Name="CreateNewFolderBtn" Margin="2px" Height="30px">Create new Folder</Button>
+                <Button Click="RenameFolderBtn_Click" x:Name="RenameFolderBtn" Margin="2px" Height="30px">Rename Folder</Button>
+                <Button Click="DeleteFolderBtn_Click" x:Name="DeleteFolderBtn" Margin="2px" Height="30px">Delete Folder</Button>
+            </UniformGrid>
+            <StackPanel>
+                <DockPanel>
+                    <Label HorizontalAlignment="Left">Date:</Label>
+                    <TextBlock x:Name="DateTxtBlock" VerticalAlignment="Center"></TextBlock>
+                </DockPanel>
+                <DockPanel>
+                    <Label HorizontalAlignment="Center">Subject:</Label>
+                    <TextBlock x:Name="SubjectTxtBlock" VerticalAlignment="Center"></TextBlock>
+                </DockPanel>
+                <Label HorizontalAlignment="Center" FontSize="14px">Message</Label>
+                <TextBlock x:Name="MessageTxtBlock"></TextBlock>
+            </StackPanel>
         </StackPanel>
 
 
