@@ -24,9 +24,16 @@
 
         <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontWeight="UltraBold" FontStyle="Oblique" Foreground="blue" Height="48" Width="211" >MailSender</TextBlock>
 
-        <ListBox Grid.Row="1" Grid.Column="0" x:Name="FolderList" Padding="10"></ListBox>
+        <ListBox SelectionChanged="FolderList_SelectionChanged" Grid.Row="1" Grid.Column="0" x:Name="FolderList" Padding="10"></ListBox>
         <ListBox Grid.Row="1" Grid.Column="1" x:Name="MessagesList" Padding="10"></ListBox>
-
+        <StackPanel Grid.Row="1" Grid.Column="3" Margin="20px">
+            <Button x:Name="FavouriteBtn" Margin="0 0 0 15px" Height="30px">Favourite</Button>
+            <Button x:Name="DeleteBtn" Margin="0 0 0 15px" Height="30px">Delete</Button>
+            <Button x:Name="MarkAsReadBtn" Margin="0 0 0 15px" Height="30px">Mark as read</Button>
+            <Button x:Name="CreateNewFolderBtn" Margin="0 0 0 15px" Height="30px">Create new Folder</Button>
+            <Button x:Name="RenameFolderBtn" Margin="0 0 0 15px" Height="30px">Rename Folder</Button>
+            <Button x:Name="DeleteFolderBtn" Margin="0 0 0 15px" Height="30px">Delete Folder</Button>
+        </StackPanel>
 
 
     </Grid>
