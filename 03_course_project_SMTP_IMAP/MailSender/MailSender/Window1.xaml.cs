@@ -65,7 +65,8 @@ namespace MailSender
             };
 
             client.Send(mail);
-
+            subjectTxtBox.Clear();
+            bodyTxtBox.Clear();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

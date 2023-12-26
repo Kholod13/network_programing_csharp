@@ -149,14 +149,18 @@ namespace MailSender
                 client.Connect("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
                 await client.AuthenticateAsync(UserLogin, UserPassword);
 
-                // Створення нової папки з ім'ям "Нова Папка"
-                change_folder folderName = new change_folder();
+                // Створення нової папки з ім'ям TmpString
+                if (!string.IsNullOrEmpty(TmpString))
+                {
+                    var personalNamespace = client.PersonalNamespaces[0];
+                    var inbox = client.Inbox;
 
-                // Додавання події MyWindow_Closed до folderName
-                folderName.Closed += MyWindow_Closed;
+                    // Спробуємо відкрити папку (це також створить папку, якщо її немає)
+                    var newFolder = inbox.Create(TmpString, true);
+                    FolderList.Items.Add(newFolder);
 
-                // Показ вікна і очікування його закриття
-                folderName.Show();
+                    MessageBox.Show($"Folder '{TmpString}' created successfully!");
+                }
 
                 // Закриття підключення
                 client.Disconnect(true);
@@ -170,10 +174,11 @@ namespace MailSender
             {
                 TmpString = folderName.Message;
 
-                // Вивести MessageBox тут, коли значення TmpString вже встановлено
-                MessageBox.Show(TmpString);
+                // Виведення в консоль, щоб перевірити, чи правильно створено папку
+                MessageBox.Show($"TmpString: {TmpString}");
             }
         }
+
 
         private void AddToFolderBtn_Click(object sender, RoutedEventArgs e)
         {
