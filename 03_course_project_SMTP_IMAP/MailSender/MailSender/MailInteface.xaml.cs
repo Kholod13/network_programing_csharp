@@ -9,20 +9,8 @@ using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Search;
 using MailKit.Security;
-using MimeKit;
-using System;
-using System.Security.Cryptography;
-using System.Text;
 using System.Windows.Controls;
-using MailKit;
-using Org.BouncyCastle.Asn1.X509;
-using static MailSender.MailInteface;
-using System.Windows.Input;
-using Microsoft.Win32;
-using Xceed.Wpf.Toolkit;
-using System.Printing;
 using MessageBox = System.Windows.MessageBox;
-using System.Windows.Interop;
 
 namespace MailSender
 {
