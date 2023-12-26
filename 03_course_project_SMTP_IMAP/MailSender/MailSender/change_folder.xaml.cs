@@ -19,6 +19,7 @@ namespace MailSender
     /// </summary>
     public partial class change_folder : Window
     {
+        public string Message {  get; set; }
         public change_folder()
         {
             InitializeComponent();
@@ -26,7 +27,7 @@ namespace MailSender
 
         private void OKBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Message = inputBoxTxt.Text;
             this.Close();
         }
     }

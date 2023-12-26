@@ -44,6 +44,18 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "AdaptiveCards.Rendering.Wpf.Xceed": {
+              "target": "Package",
+              "version": "[2.7.3, )"
+            },
+            "Extended.Wpf.Toolkit": {
+              "target": "Package",
+              "version": "[4.5.1, )"
+            },
+            "Extended.Wpf.Toolkit.PropertyGrid.Collection": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[4.2.0, )"

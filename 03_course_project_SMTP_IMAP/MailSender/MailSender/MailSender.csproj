@@ -12,6 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AdaptiveCards.Rendering.Wpf.Xceed" Version="2.7.3" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.1" />
+    <PackageReference Include="Extended.Wpf.Toolkit.PropertyGrid.Collection" Version="1.0.1" />
     <PackageReference Include="MailKit" Version="4.2.0" />
   </ItemGroup>
 

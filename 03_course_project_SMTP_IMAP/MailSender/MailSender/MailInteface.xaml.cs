@@ -20,8 +20,9 @@ using static MailSender.MailInteface;
 using System.Windows.Input;
 using Microsoft.Win32;
 using Xceed.Wpf.Toolkit;
-using MahApps.Metro.Controls.Dialogs;
 using System.Printing;
+using MessageBox = System.Windows.MessageBox;
+using System.Windows.Interop;
 
 namespace MailSender
 {
@@ -41,6 +42,8 @@ namespace MailSender
              new MainFoledr() { Name = "Спам", ServiceName = MailKit.SpecialFolder.Junk },
              new MainFoledr() { Name = "Видалені", ServiceName = MailKit.SpecialFolder.Trash },
         };
+
+        private string TmpString { get; set; }
 
         public MailInteface(string userLogin, string userPassword)
         {
@@ -151,32 +154,54 @@ namespace MailSender
             }
         }
 
-        private void CreateNewFolderBtn_Click(object sender, RoutedEventArgs e)
+        private async void CreateNewFolderBtn_Click(object sender, RoutedEventArgs e)
         {
+            using (var client = new ImapClient())
+            {
+                client.Connect("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
+                await client.AuthenticateAsync(UserLogin, UserPassword);
 
+                // Створення нової папки з ім'ям "Нова Папка"
+                change_folder folderName = new change_folder();
+
+                // Додавання події MyWindow_Closed до folderName
+                folderName.Closed += MyWindow_Closed;
+
+                // Показ вікна і очікування його закриття
+                folderName.Show();
+
+                // Закриття підключення
+                client.Disconnect(true);
+            }
         }
+
+        private void MyWindow_Closed(object sender, EventArgs e)
+        {
+            // Код, який виконується після закриття вікна
+            if (sender is change_folder folderName)
+            {
+                TmpString = folderName.Message;
+
+                // Вивести MessageBox тут, коли значення TmpString вже встановлено
+                MessageBox.Show(TmpString);
+            }
+        }
+
         private void AddToFolderBtn_Click(object sender, RoutedEventArgs e)
         {
             if (MessagesList.SelectedItem != null)
             {
                 // Отримати вибраний елемент
                 var selectedMessage = MessagesList.SelectedItem as string;
-
-                string choseFolder = ShowInputDialog();
+                if (selectedMessage != null)
+                {
+                    
+                }
             }
             else
             {
                 MessageBox.Show("Please enter the message.");
             }
-        }
-        private string ShowInputDialog(object sender, RoutedEventArgs e)
-        {
-            var inputBox = new InputBox("Введення тексту", "Введіть ваш текст:");
-            if (inputBox.ShowDialog() == true)
-            {
-                MessageBox.Show($"Ваш введений текст: {inputBox.Text}");
-            }
-            return inputBox;
         }
 
         private void RenameFolderBtn_Click(object sender, RoutedEventArgs e)

@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender"
         mc:Ignorable="d"
-        Title="Input Folder" Height="150" Width="300">
+        Title="Input Folder" Height="180" Width="300">
     <StackPanel Margin="30px">
         <DockPanel>
-            <TextBlock Margin="10px">Input name select folder:</TextBlock>
-            <TextBox VerticalAlignment="Center"></TextBox>
+            <TextBlock Margin="10px">Input folder name:</TextBlock>
+            <TextBox x:Name="inputBoxTxt" VerticalAlignment="Center"></TextBox>
         </DockPanel>
         <Button Click="OKBtn_Click" MaxWidth="50px" x:Name="OKBtn">Ok</Button>
     </StackPanel>
