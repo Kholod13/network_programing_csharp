@@ -130,3 +130,5 @@ C:\#FILE ZONE\work files\Repo\network_programing_csharp\03_course_project_SMTP_I
 C:\#FILE ZONE\work files\Repo\network_programing_csharp\03_course_project_SMTP_IMAP\MailSender\MailSender\bin\Debug\net6.0-windows\ru\Xceed.Wpf.AvalonDock.NET5.resources.dll
 C:\#FILE ZONE\work files\Repo\network_programing_csharp\03_course_project_SMTP_IMAP\MailSender\MailSender\bin\Debug\net6.0-windows\sv\Xceed.Wpf.AvalonDock.NET5.resources.dll
 C:\#FILE ZONE\work files\Repo\network_programing_csharp\03_course_project_SMTP_IMAP\MailSender\MailSender\bin\Debug\net6.0-windows\zh-Hans\Xceed.Wpf.AvalonDock.NET5.resources.dll
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\03_course_project_SMTP_IMAP\MailSender\MailSender\bin\Debug\net6.0-windows\Renci.SshNet.dll
+C:\#FILE ZONE\work files\Repo\network_programing_csharp\03_course_project_SMTP_IMAP\MailSender\MailSender\bin\Debug\net6.0-windows\SshNet.Security.Cryptography.dll

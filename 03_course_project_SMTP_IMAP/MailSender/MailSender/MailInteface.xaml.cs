@@ -11,6 +11,7 @@ using MailKit.Search;
 using MailKit.Security;
 using System.Windows.Controls;
 using MessageBox = System.Windows.MessageBox;
+using Renci.SshNet.Messages;
 
 namespace MailSender
 {
@@ -21,18 +22,7 @@ namespace MailSender
     {
         private string UserLogin { get; set; }
         private string UserPassword { get; set; }
-
-        List<MainFoledr> folders = new List<MainFoledr> 
-        {
-             new MainFoledr() { Name = "Уся пошта", ServiceName = MailKit.SpecialFolder.All },
-             new MainFoledr() { Name = "Відправлені", ServiceName = MailKit.SpecialFolder.Sent },
-             new MainFoledr() { Name = "Чернетки", ServiceName = MailKit.SpecialFolder.Drafts },
-             new MainFoledr() { Name = "Спам", ServiceName = MailKit.SpecialFolder.Junk },
-             new MainFoledr() { Name = "Видалені", ServiceName = MailKit.SpecialFolder.Trash },
-        };
-
-        private string TmpString { get; set; }
-
+        List<MainFoledr> folders = new List<MainFoledr>();
         public MailInteface(string userLogin, string userPassword)
         {
             InitializeComponent();
@@ -47,10 +37,38 @@ namespace MailSender
                 client.Authenticate(UserLogin, UserPassword);
 
                 // --------------- get all folders
-                foreach (var folder in folders)
+
+                // Отримати особистий простір імен клієнта
+                var personalNamespace = client.PersonalNamespaces[0];
+
+                // Отримати список всіх папок
+                var foldersList = client.GetFolders(personalNamespace);
+
+                List<string> names = new List<string>();
+                List<MailKit.SpecialFolder> specialFolders = new List<MailKit.SpecialFolder>();
+
+                // Додати імена папок до списку або вивести їх у консоль
+                foreach (var folder in foldersList)
                 {
                     FolderList.Items.Add(folder.Name);
+
+                    // Створити об'єкт MainFoledr та додати його до списку folders
+                    names.Add(folder.Name);
                 }
+                // Отримання всіх спеціальних папок
+                foreach (MailKit.SpecialFolder specialFolder in Enum.GetValues(typeof(MailKit.SpecialFolder)))
+                {
+                    // Отримати конкретну спеціальну папку
+                    specialFolders.Add(specialFolder);
+                }
+
+                for (int i = 0; i < names.Count && i < specialFolders.Count; i++)
+                {
+                    folders.Add(new MainFoledr { Name = names[i], ServiceName = specialFolders[i] });
+                }
+
+
+                client.Disconnect(true);
             }
         }
         public class MainFoledr
@@ -58,6 +76,7 @@ namespace MailSender
             public string Name { get; set; }
             public MailKit.SpecialFolder ServiceName { get; set; }
         }
+
         private async void FolderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MessagesList.Items.Clear();
@@ -79,33 +98,37 @@ namespace MailSender
                                 {
                                     var mailFolder = client.GetFolder(folders[i].ServiceName);
 
-                                    // Відкриття папки для читання
-                                    await mailFolder.OpenAsync(FolderAccess.ReadWrite);
-
-                                    // Отримання всіх повідомлень з папки
-                                    var uids = await mailFolder.SearchAsync(SearchQuery.All);
-
-                                    // Додавання назви папки до списку повідомлень
-                                    MessagesList.Items.Add($"Messages in {folders[i].Name}");
-
-                                    // Виведення інформації про кожне повідомлення
-                                    foreach (var uid in uids)
+                                    if (mailFolder != null)
                                     {
-                                        var message = await mailFolder.GetMessageAsync(uid);
-                                        MessagesList.Items.Add($"{message.Date}: {message.Subject} - {new string(message.TextBody?.ToArray())}...");
+                                        await mailFolder.OpenAsync(FolderAccess.ReadWrite);
+                                        // Решта коду
+                                        var uids = await mailFolder.SearchAsync(SearchQuery.All);
+
+                                        // Додавання назви папки до списку повідомлень
+                                        MessagesList.Items.Add($"Messages in {folders[i].Name}");
+
+                                        // Виведення інформації про кожне повідомлення
+                                        foreach (var uid in uids)
+                                        {
+                                            var message = await mailFolder.GetMessageAsync(uid);
+                                            MessagesList.Items.Add($"{message.Date}: {message.Subject} - {new string(message.TextBody?.ToArray())}...");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show($"Folder is empty");
                                     }
                                 }
                             }
                         }
                     }
-                    catch(Exception ex) 
-                    { 
+                    catch (Exception ex)
+                    {
                         
                     }
                 }
             }
         }
-
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -148,38 +171,25 @@ namespace MailSender
             {
                 client.Connect("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
                 await client.AuthenticateAsync(UserLogin, UserPassword);
-
+                
                 // Створення нової папки з ім'ям TmpString
-                if (!string.IsNullOrEmpty(TmpString))
+                if (!string.IsNullOrEmpty(inputTxtBox.Text))
                 {
                     var personalNamespace = client.PersonalNamespaces[0];
                     var inbox = client.Inbox;
 
                     // Спробуємо відкрити папку (це також створить папку, якщо її немає)
-                    var newFolder = inbox.Create(TmpString, true);
-                    FolderList.Items.Add(newFolder);
+                    var newFolder = inbox.Create(inputTxtBox.Text, true);
+                    FolderList.Items.Add(newFolder.Name);
 
-                    MessageBox.Show($"Folder '{TmpString}' created successfully!");
+                    MessageBox.Show($"Folder '{inputTxtBox.Text}' created successfully!");
                 }
 
                 // Закриття підключення
                 client.Disconnect(true);
             }
+            inputTxtBox.Clear();
         }
-
-        private void MyWindow_Closed(object sender, EventArgs e)
-        {
-            // Код, який виконується після закриття вікна
-            if (sender is change_folder folderName)
-            {
-                TmpString = folderName.Message;
-
-                // Виведення в консоль, щоб перевірити, чи правильно створено папку
-                MessageBox.Show($"TmpString: {TmpString}");
-            }
-        }
-
-
         private void AddToFolderBtn_Click(object sender, RoutedEventArgs e)
         {
             if (MessagesList.SelectedItem != null)
