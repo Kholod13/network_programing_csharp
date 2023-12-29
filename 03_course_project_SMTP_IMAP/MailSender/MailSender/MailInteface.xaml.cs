@@ -38,28 +38,19 @@ namespace MailSender
                 client.Authenticate(UserLogin, UserPassword);
 
                 // --------------- get all folders
-
-                // Отримати особистий простір імен клієнта
                 var personalNamespace = client.PersonalNamespaces[0];
-
-                // Отримати список всіх папок
                 var foldersList = client.GetFolders(personalNamespace);
 
                 List<string> names = new List<string>();
                 List<MailKit.SpecialFolder> specialFolders = new List<MailKit.SpecialFolder>();
 
-                // Додати імена папок до списку або вивести їх у консоль
                 foreach (var folder in foldersList)
                 {
                     FolderList.Items.Add(folder.Name);
-
-                    // Створити об'єкт MainFoledr та додати його до списку folders
                     names.Add(folder.Name);
                 }
-                // Отримання всіх спеціальних папок
                 foreach (MailKit.SpecialFolder specialFolder in Enum.GetValues(typeof(MailKit.SpecialFolder)))
                 {
-                    // Отримати конкретну спеціальну папку
                     specialFolders.Add(specialFolder);
                 }
 
@@ -67,7 +58,6 @@ namespace MailSender
                 {
                     folders.Add(new MainFoledr { Name = names[i], ServiceName = specialFolders[i] });
                 }
-
 
                 client.Disconnect(true);
             }
@@ -102,13 +92,10 @@ namespace MailSender
                                     if (mailFolder != null)
                                     {
                                         await mailFolder.OpenAsync(FolderAccess.ReadWrite);
-                                        // Решта коду
                                         var uids = await mailFolder.SearchAsync(SearchQuery.All);
 
-                                        // Додавання назви папки до списку повідомлень
                                         MessagesList.Items.Add($"Messages in {folders[i].Name}");
 
-                                        // Виведення інформації про кожне повідомлення
                                         foreach (var uid in uids)
                                         {
                                             var message = await mailFolder.GetMessageAsync(uid);
@@ -150,12 +137,10 @@ namespace MailSender
         {
             if (MessagesList.SelectedItems != null && MessagesList.SelectedItems.Count > 0)
             {
-                // Взяти перший вибраний елемент (якщо є)
                 var selectedMessage = MessagesList.SelectedItem as string;
 
                 if (selectedMessage != null)
                 {
-                    // Припустимо, що дані повідомлення мають фіксований формат для прикладу
                     string[] messageParts = selectedMessage.Split('-');
 
                     if (messageParts.Length >= 3)
@@ -175,13 +160,11 @@ namespace MailSender
                 client.Connect("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
                 await client.AuthenticateAsync(UserLogin, UserPassword);
                 
-                // Створення нової папки з ім'ям TmpString
                 if (!string.IsNullOrEmpty(inputTxtBox.Text))
                 {
                     var personalNamespace = client.PersonalNamespaces[0];
                     var inbox = client.Inbox;
 
-                    // Спробуємо відкрити папку (це також створить папку, якщо її немає)
                     var newFolder = inbox.Create(inputTxtBox.Text, true);
                     FolderList.Items.Add(newFolder.Name);
 
@@ -193,7 +176,6 @@ namespace MailSender
                     MessageBox.Show("Please input name new folder!");
                 }
 
-                // Закриття підключення
                 client.Disconnect(true);
             }
             inputTxtBox.Clear();
@@ -251,7 +233,6 @@ namespace MailSender
             }
         }
 
-        // Метод для отримання UID повідомлення
         private MailKit.UniqueId GetMessageUid(string selectedMessage, ImapClient client)
         {
             // Реалізуйте логіку для отримання UID повідомлення
@@ -273,13 +254,8 @@ namespace MailSender
             return MailKit.UniqueId.MinValue;
         }
 
-        // Метод для отримання потоку повідомлення
         private MimeMessage GetMessageStream(MailKit.UniqueId uid, ImapClient client)
         {
-            // Реалізуйте логіку для отримання потоку повідомлення
-            // Цей метод має повертати об'єкт MimeMessage, який представляє повідомлення
-
-            // Приклад:
             var inbox = client.Inbox;
             inbox.Open(FolderAccess.ReadOnly);
 
@@ -287,11 +263,65 @@ namespace MailSender
             return message;
         }
 
-
-        private void RenameFolderBtn_Click(object sender, RoutedEventArgs e)
+        private async void RenameFolderBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (FolderList.SelectedItem != null && !string.IsNullOrEmpty(inputTxtBox.Text))
+            {
+                using (var client = new ImapClient())
+                {
+                    try
+                    {
+                        client.Connect("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
+                        await client.AuthenticateAsync(UserLogin, UserPassword);
 
+                        var selectedFolderName = FolderList.SelectedItem as string;
+
+                        var sourceFolder = client.GetFolder($"inbox/{selectedFolderName}");
+
+                        if (sourceFolder != null)
+                        { 
+                            var newFolderName = inputTxtBox.Text;
+                            var destinationFolder = client.GetFolder(newFolderName);
+
+                            if (destinationFolder == null)
+                            {
+                                var newFolder = sourceFolder.Create(newFolderName, true);
+                                destinationFolder = client.GetFolder(newFolderName);
+                            }
+
+                            foreach (var uniqueId in sourceFolder.Search(SearchQuery.All))
+                            {
+                                var message = sourceFolder.GetMessage(uniqueId);
+                                destinationFolder.Append(message);
+                            }
+
+                            sourceFolder.Delete();
+                            FolderList.Items.Remove(sourceFolder);
+                            FolderList.Items.Add(newFolderName);
+
+                            MessageBox.Show($"Folder '{selectedFolderName}' renamed to '{newFolderName}' successfully!");
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Folder '{selectedFolderName}' not found!");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"An error occurred: {ex.Message}");
+                    }
+                    finally
+                    {
+                        client.Disconnect(true);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a folder and enter the new name to rename.");
+            }
         }
+
 
         private void DeleteFolderBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -302,15 +332,12 @@ namespace MailSender
                     client.Connect("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
                     client.Authenticate(UserLogin, UserPassword);
 
-                    // Отримання папки для видалення (наприклад, "Нова Папка")
                     if (inputTxtBox.Text != string.Empty)
                     {
                         var folderToDelete = client.GetFolder($"inbox/{inputTxtBox.Text}");
 
-                        // Перевірка, чи папка існує перед спробою видалення
                         if (folderToDelete != null)
                         {
-                            // Видалення папки
                             folderToDelete.Delete();
                             MessageBox.Show($"Folder '{inputTxtBox.Text}' deleted successfully!");
                             FolderList.Items.Remove(inputTxtBox.Text);
@@ -324,12 +351,10 @@ namespace MailSender
                 }
                 catch (Exception ex)
                 {
-                    // Обробка помилок під час виконання операцій IMAP
                     MessageBox.Show($"An error occurred: {ex.Message}");
                 }
                 finally
                 {
-                    // Завершення з'єднання
                     client.Disconnect(true);
                 }
             }

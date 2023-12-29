@@ -22,7 +22,7 @@
                 <ColumnDefinition Width="252*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Height="24" Width="44" >Login</TextBlock>
-            <TextBox Padding="5" Grid.Column="2" Margin="0,20,0,20" x:Name="UserLogin" Text="vlad13holod@gmail.com" />
+            <TextBox Padding="5" Grid.Column="2" Margin="0,20,0,20" x:Name="UserLogin" Text="@gmail.com" />
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -32,7 +32,7 @@
                 <ColumnDefinition Width="63*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Height="24" Width="78" >Password</TextBlock>
-            <TextBox Padding="5" Grid.Column="2" Margin="0,20,0,20" x:Name="UserPassword" Text="ozdrggdyvqfigzhe" />
+            <TextBox Padding="5" Grid.Column="2" Margin="0,20,0,20" x:Name="UserPassword" Text="" />
         </Grid>
         <Button Grid.Row="3" Width="200" Height="35" Click="Button_Click">Next</Button>
     </Grid>
